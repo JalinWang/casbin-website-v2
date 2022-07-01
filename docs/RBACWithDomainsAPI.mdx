@@ -8,6 +8,22 @@ import TabItem from '@theme/TabItem';
 
 A more friendly API for RBAC with domains. This API is a subset of Management API. The RBAC users could use this API to simplify the code. 
 
+
+> Note: Conventionally domain token name in policy definition is `dom` and placed in the beginning. Now Golang version supports customized token name & place. If the subject token name is `dom`, the subject token can be placed at an arbitrary place and no extra action needs.  If the subject token name is other than `dom` , `e.SetFieldIndex()` for `constant.DomainIndex` should be called after the enforcer is initialized.
+>
+> ```ini 
+> # `domain` here for `dom`
+> [policy_definition]
+> p = sub, obj, act, domain
+> ```
+>
+> ```golang
+> e.SetFieldIndex("p", constant.DomainIndex, 3) // index start from 0
+> users := e.GetAllUsersByDomain("domain1") // without SetFieldIndex, it will raise an error
+> ```
+
+## Reference
+
 ## Reference
 
 global variable `e` is Enforcer instance.
