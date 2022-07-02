@@ -8,19 +8,6 @@ import TabItem from '@theme/TabItem';
 
 A more friendly API for RBAC. This API is a subset of Management API. The RBAC users could use this API to simplify the code.
 
-> Note: Conventionally subject token name in policy definition is `sub` and placed in the beginning. Now Golang version supports customized token name & place. If the subject token name is `sub`, the subject token can be placed at an arbitrary place and no extra action needs.  If the subject token name is other than `sub` , `e.SetFieldIndex()` for `constant.SubjectIndex` should be called after the enforcer is initialized.
->
-> ```ini 
-> # `subject` here for sub
-> [policy_definition]
-> p =  obj, act, subject
-> ```
->
-> ```golang
-> e.SetFieldIndex("p", constant.SubjectIndex, 2) // index start from 0
-> ok, err := e.DeleteUser("alice") // without SetFieldIndex, it will raise an error
-> ```
-
 ## Reference
 
 global variable `e` is Enforcer instance.
